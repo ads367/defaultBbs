@@ -14,7 +14,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="kr.co.sppartners.jqueryBoard.vo.JqueryBoardVO" alias="JqueryBoardVO"/>
+		<typeAlias type="kr.co.sppartners.board.vo.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
 </configuration>

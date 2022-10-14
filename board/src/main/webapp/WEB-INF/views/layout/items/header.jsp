@@ -9,7 +9,7 @@
 	function move(type) {
 		if(type == 'jquery') {
 			console.log('???')
-			location.href="/jqueryBoard/list.do";
+			location.href="/jqueryBoard/list.do?pageIndex=1";
 		} else {
 			
 		}

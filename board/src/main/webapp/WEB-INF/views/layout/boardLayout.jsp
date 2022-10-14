@@ -17,7 +17,7 @@
 	
 	<title>게시판 예제</title>
 </head>
-<body>
+<body style="text-align: center;">
 	<tiles:insertAttribute name="header" ignore="true"></tiles:insertAttribute>
 	<tiles:insertAttribute name="body" ignore="true"></tiles:insertAttribute>
 </body>
