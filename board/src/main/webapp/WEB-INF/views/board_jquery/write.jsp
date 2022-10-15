@@ -31,26 +31,28 @@
 </style>
 <div class="bodyDv">
 	<h1>Jquery Write</h1>
-	<table>
-		<tr>
-			<td class="sub">
-				<span>제목</span>
-				<input type="text" class="con_title" name="title" id="title" placeholder="제목을 입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td class="sub">
-				<span>작성자</span>
-				<input type="text" class="con_title" name="registNm" id="registNm" placeholder="작성자를 입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td class="sub">
-				<span>내용</span>
-				<textarea class="con_content" name="content" id="content" placeholder="내용을 입력해주세요."></textarea>
-			</td>
-		</tr>
-	</table>
+	<form name="frm" id="frm" action="/jqueryBoard/writeAction.do" method="post">
+		<table>
+			<tr>
+				<td class="sub">
+					<span>제목</span>
+					<input type="text" class="con_title" name="title" id="title" placeholder="제목을 입력해주세요.">
+				</td>
+			</tr>
+			<tr>
+				<td class="sub">
+					<span>작성자</span>
+					<input type="text" class="con_title" name="registNm" id="registNm" placeholder="작성자를 입력해주세요.">
+				</td>
+			</tr>
+			<tr>
+				<td class="sub">
+					<span>내용</span>
+					<textarea class="con_content" name="content" id="content" placeholder="내용을 입력해주세요."></textarea>
+				</td>
+			</tr>
+		</table>
+	</form>
 	<div class="btn_col">
 		<button type="button" onclick="insert()">등록</button>
 		<button type="button" onclick="cancel()">취소</button>
@@ -73,32 +75,7 @@
 			$('#content').focus();
 			return;
 		}
-		var param = {
-				title : $('#title').val(),
-				registNm : $('#registNm').val(),
-				content : $('#content').val()
-		}
-		
-		$.ajax({
-			url: '/jqueryBoard/ajax/write.ajax',
-			contentType : 'application/json; charset=UTF-8',
-			method: 'POST',
-			data: JSON.stringify(param),
-			dataType: 'json',
-			success: function(result) {
-				console.log(result);
-			},
-			beforeSend: function() {
-				
-			},
-			complete: function() {
-				
-			},
-			error: function(e) {
-				alert('에러 발생');
-			}
-		})
-		
+		$("#frm").submit();
 	}
 	
 	// 취소

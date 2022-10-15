@@ -20,8 +20,17 @@ public class BoardService {
 	 * @param 
 	 * @throws Exception
 	 */
-	public List<BoardVO> findAllBbs() throws Exception {
-		return boardDAO.findAllBbs();
+	public List<BoardVO> findAllBbs(BoardVO boardVO) throws Exception {
+		return boardDAO.findAllBbs(boardVO);
+	}
+	
+	/**
+	 * 게시판 목록 갯수 조회
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public int findAllBbsCnt(BoardVO boardVO) throws Exception {
+		return boardDAO.findAllBbsCnt(boardVO);
 	}
 	
 	/**
@@ -38,6 +47,15 @@ public class BoardService {
 		int result = boardDAO.saveBbs(boardVO);
 		
 		return result;
+	}
+	
+	/**
+	 * 게시판 상세조회
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public BoardVO findBbs(BoardVO boardVO) throws Exception {
+		return boardDAO.findBbs(boardVO);
 	}
 	
 }

@@ -3,7 +3,7 @@
 <mapper namespace="boardDAO">
 	
 	<!-- 목록 조회 -->
-	<select id="findAllBbs" resultType="BoardVO">
+	<select id="findAllBbs" parameterType="BoardVO" resultType="BoardVO">
 		SELECT bbs_id							AS bbsId
 			 , title							AS title
 			 , content							AS content
@@ -12,7 +12,51 @@
 			 , DATE_FORMAT(updt_dt, '%Y-%m-%d')	AS updtDt
 		  FROM default_bbs
 		 WHERE use_at = 'Y'
+		 <if test="searchKeyword != null and searchKeyword != ''">
+		 	<choose>
+		 		<when test="searchType != null and searchType != ''">
+		 			<if test="searchType == 'title'">
+		 			AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 			<if test="searchType == 'content'">
+		 			AND content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 		</when>
+		 		<otherwise>
+		 			AND ( title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				OR
+		 				  content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				)
+		 		</otherwise>
+		 	</choose>
+		 </if>
 	  ORDER BY updt_dt DESC
+		 LIMIT #{perPage} OFFSET #{startPage}
+	</select>
+	
+	<!-- 목록 갯수 조회 -->
+	<select id="findAllBbsCnt" parameterType="BoardVO" resultType="java.lang.Integer">
+		SELECT COUNT(bbs_id)
+		  FROM default_bbs
+		 WHERE use_at = 'Y'
+		 <if test="searchKeyword != null and searchKeyword != ''">
+		 	<choose>
+		 		<when test="searchType != null and searchType != ''">
+		 			<if test="searchType == 'title'">
+		 			AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 			<if test="searchType == 'content'">
+		 			AND content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 		</when>
+		 		<otherwise>
+		 			AND ( title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				OR
+		 				  content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				)
+		 		</otherwise>
+		 	</choose>
+		 </if>
 	</select>
 	
 	<!-- 게시판 아이디 가장 큰 값 호출 -->
@@ -42,10 +86,26 @@
 			, 0
 			, #{registNm}
 			, NOW()
-			, #{updtNm}
+			, #{registNm}
 			, NOW()
 			, 'Y'
 		)
 	</insert>
+	
+	<!-- 상세조회 -->
+	<select id="findBbs" parameterType="BoardVO" resultType="BoardVO">
+		SELECT bbs_id								AS bbsId
+			 , title								AS title
+			 , content								AS content
+			 , read_cnt								AS readCnt
+			 , like_cnt								AS likeCnt
+			 , regist_nm							AS registNm
+			 , DATE_FORMAT(regist_dt, '%Y-%m-%d')	AS registDt
+			 , updt_nm								AS updtNm
+			 , DATE_FORMAT(updt_dt, '%Y-%m-%d')		AS updtDt
+			 , use_at								AS useAt
+		  FROM default_bbs
+		 WHERE bbs_id = #{bbsId}
+	</select>
 	
 </mapper>

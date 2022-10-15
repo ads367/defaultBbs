@@ -1,6 +1,6 @@
 package kr.co.sppartners.board.vo;
 
-public class BoardVO {
+public class BoardVO extends Common {
 	
 	private int bbsId;			// 게시판 아이디
 	
@@ -19,6 +19,8 @@ public class BoardVO {
 	private String updtNm;		// 수정자명
 	
 	private String updtDt;		// 수정일
+	
+	private String useAt;		// 사용여부
 
 	public int getBbsId() {
 		return bbsId;
@@ -90,5 +92,13 @@ public class BoardVO {
 
 	public void setUpdtDt(String updtDt) {
 		this.updtDt = updtDt;
+	}
+
+	public String getUseAt() {
+		return useAt;
+	}
+
+	public void setUseAt(String useAt) {
+		this.useAt = useAt;
 	}
 }

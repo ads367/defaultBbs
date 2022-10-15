@@ -17,11 +17,20 @@ public class BoardDAO {
 	
 	/**
 	 * 게시판 목록 조회
-	 * @param 
+	 * @param BoardVO
 	 * @throws Exception
 	 */
-	public List<BoardVO> findAllBbs() throws Exception {
-		return sql.selectList("findAllBbs");
+	public List<BoardVO> findAllBbs(BoardVO boardVO) throws Exception {
+		return sql.selectList("findAllBbs", boardVO);
+	}
+	
+	/**
+	 * 게시판 목록 갯수 조회
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public int findAllBbsCnt(BoardVO boardVO) throws Exception {
+		return sql.selectOne("findAllBbsCnt", boardVO);
 	}
 	
 	/**
@@ -40,6 +49,15 @@ public class BoardDAO {
 	 */
 	public int saveBbs(BoardVO boardVO) throws Exception {
 		return sql.insert("saveBbs", boardVO);
+	}
+	
+	/**
+	 * 게시판 상세조회
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public BoardVO findBbs(BoardVO boardVO) throws Exception {
+		return sql.selectOne("findBbs", boardVO);
 	}
 	
 }
