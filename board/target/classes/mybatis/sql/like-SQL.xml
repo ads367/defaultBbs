@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="likeDAO">
+	
+	<!-- 중복 확인 -->
+	<select id="findOverlapLike" parameterType="LikeVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM default_like
+		 WHERE bbs_id = #{bbsId}
+		   AND ip = #{ip}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="saveLike" parameterType="LikeVO">
+		INSERT INTO default_like (
+			ip
+			, bbs_id
+			, regist_dt
+		) VALUES (
+			#{ip}
+			, #{bbsId}
+			, NOW()
+		)
+	</insert>
+</mapper>

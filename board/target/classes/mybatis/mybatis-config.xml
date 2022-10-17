@@ -15,6 +15,7 @@
 
 	<typeAliases>
 		<typeAlias type="kr.co.sppartners.board.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="kr.co.sppartners.like.vo.LikeVO" alias="LikeVO"/>
 	</typeAliases>
 	
 </configuration>

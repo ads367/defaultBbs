@@ -52,6 +52,15 @@ public class BoardDAO {
 	}
 	
 	/**
+	 * 게시판 조회수 증가
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public int updateBbsReadCnt(BoardVO boardVO) throws Exception {
+		return sql.update("updateBbsReadCnt", boardVO);
+	}
+	
+	/**
 	 * 게시판 상세조회
 	 * @param BoardVO
 	 * @throws Exception
@@ -60,4 +69,21 @@ public class BoardDAO {
 		return sql.selectOne("findBbs", boardVO);
 	}
 	
+	/**
+	 * 게시판 삭제
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public int delBbs(BoardVO boardVO) throws Exception {
+		return sql.update("delBbs", boardVO);
+	}
+	
+	/**
+	 * 게시판 수정
+	 * @param BoardVO
+	 * @throws Exception
+	 */
+	public int updateBbs(BoardVO boardVO) throws Exception {
+		return sql.update("updateBbs", boardVO);
+	}
 }

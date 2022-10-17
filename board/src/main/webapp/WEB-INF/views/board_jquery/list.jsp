@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <style>
 	table {
 		width: 100%;
@@ -63,8 +62,8 @@
 			<option value="title" ${ boardVO.searchType eq 'title' ? 'selected' : '' }>제목</option>
 			<option value="content" ${ boardVO.searchType eq 'content' ? 'selected' : '' }>내용</option>
 		</select>
-		<input type="text" placeholder="검색어를 입력하세요." name="searchKeyword" id="searchKeyword" value="${ boardVO.searchKeyword }">
-		<button type="button" onclick="goSearch()">검색</button>
+		<input type="text" placeholder="검색어를 입력하세요." name="searchKeyword" id="searchKeyword" value="<c:out value="${ boardVO.searchKeyword }" />">
+		<button type="button" onclick="goSearch(1)">검색</button>
 	</div>
 	<table>
 		<colgroup>
@@ -105,7 +104,8 @@
 	<c:if test="${ fn:length(list) > 0 }">
 		<div class="pagination">
 			<c:if test="${ boardVO.nowPage != 1 }">
-				<a href="/jqueryBoard/list.do?nowPage=${ boardVO.nowPage - 1 }">&lt;</a>
+				<a href="#" onclick="goSearch(1)">&lt;&lt;</a> 
+				<a href="#" onclick="goSearch('<c:out value="${ boardVO.nowPage - 1 }" />')">&lt;</a>
 			</c:if>
 			<c:forEach begin="${ boardVO.firstPage}" end="${ boardVO.lastPage }" var="item">
 				<c:choose>
@@ -113,12 +113,13 @@
 						<b>${ item }</b>
 					</c:when>
 					<c:otherwise>
-						<a href="/jqueryBoard/list.do?nowPage=${ item }">${ item }</a>
+						<a href="#" onclick="goSearch('<c:out value="${ item }" />')">${ item }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-			<c:if test="${ boardVO.lastPage < boardVO.endPage }">
-				<a href="/jqueryBoard/list.do?nowPage=${ boardVO.nowPage + 1 }">&gt;</a>
+			<c:if test="${ boardVO.nowPage < boardVO.endPage }">
+				<a href="#" onclick="goSearch('<c:out value="${ boardVO.nowPage + 1 }" />')">&gt;</a>
+				<a href="#" onclick="goSearch('<c:out value="${ boardVO.endPage }" />')">&gt;&gt;</a>
 			</c:if>
 		</div>
 	</c:if>
@@ -129,18 +130,19 @@
 
 <script>
 	$(document).ready(function() {
+		// 검색어 입력란에서 Enter 이벤트 발생
 		$(document).on('keydown', '#searchKeyword', function(key) {
 			if(key.keyCode == 13) {
-				goSearch();
+				goSearch(1);
 			}
 		});
 	});
 	
 	// 검색
-	function goSearch() {
+	function goSearch(idx) {
+		var nowPage = idx;
 		var searchType = $("#searchType").val();
 		var searchKeyword = $("#searchKeyword").val();
-		var nowPage = 1;
 		var url = '/jqueryBoard/list.do?nowPage='+ nowPage;
 			url += '&searchType='+ searchType;
 			url += '&searchKeyword='+ searchKeyword;
@@ -152,9 +154,9 @@
 	}
 	// 상세 정보 조회
 	function goRead(id) {
-		var searchType = '${boardVO.searchType}';
-		var searchKeyword = '${boardVO.searchKeyword}';
-		var nowPage = '${boardVO.nowPage}';
+		var searchType = '<c:out value="${boardVO.searchType}" />';
+		var searchKeyword = '<c:out value="${boardVO.searchKeyword}" />';
+		var nowPage = '<c:out value="${boardVO.nowPage}" />';
 		var url = '/jqueryBoard/read.do?bbsId='+ id;
 			url += '&nowPage='+ nowPage;
 			url += '&searchType='+ searchType;

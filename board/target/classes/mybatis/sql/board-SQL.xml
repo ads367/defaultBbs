@@ -72,7 +72,6 @@
 			, title
 			, content
 			, read_cnt
-			, like_cnt
 			, regist_nm
 			, regist_dt
 			, updt_nm
@@ -83,7 +82,6 @@
 			, #{title}
 			, #{content}
 			, 0
-			, 0
 			, #{registNm}
 			, NOW()
 			, #{registNm}
@@ -92,20 +90,47 @@
 		)
 	</insert>
 	
+	<!-- 조회수 증가 -->
+	<update id="updateBbsReadCnt" parameterType="BoardVO">
+		UPDATE default_bbs
+		   SET read_cnt = read_cnt + 1
+		 WHERE bbs_id = #{bbsId}
+	</update>
+	
 	<!-- 상세조회 -->
 	<select id="findBbs" parameterType="BoardVO" resultType="BoardVO">
 		SELECT bbs_id								AS bbsId
 			 , title								AS title
 			 , content								AS content
 			 , read_cnt								AS readCnt
-			 , like_cnt								AS likeCnt
 			 , regist_nm							AS registNm
 			 , DATE_FORMAT(regist_dt, '%Y-%m-%d')	AS registDt
 			 , updt_nm								AS updtNm
 			 , DATE_FORMAT(updt_dt, '%Y-%m-%d')		AS updtDt
 			 , use_at								AS useAt
+			 , ( SELECT COUNT(*)
+				   FROM default_like
+				  WHERE bbs_id = #{bbsId} )			AS likeCnt
 		  FROM default_bbs
 		 WHERE bbs_id = #{bbsId}
 	</select>
+	
+	<!-- 삭제 -->
+	<update id="delBbs" parameterType="BoardVO">
+		UPDATE default_bbs
+		   SET use_at = 'N'
+		 WHERE bbs_id = #{bbsId}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateBbs" parameterType="BoardVO">
+		UPDATE default_bbs
+		   SET title = #{title}
+			 , content = #{content}
+			 , read_cnt = #{readCnt}
+			 , updt_nm = #{updtNm}
+			 , updt_dt = NOW()
+		 WHERE bbs_id = #{bbsId}
+	</update>
 	
 </mapper>
