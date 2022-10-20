@@ -1,6 +1,6 @@
 package kr.co.sppartners.like.vo;
 
-import kr.co.sppartners.board.vo.Common;
+import kr.co.sppartners.jquery.vo.Common;
 
 public class LikeVO extends Common {
 	

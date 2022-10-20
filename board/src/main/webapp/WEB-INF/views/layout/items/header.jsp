@@ -8,10 +8,9 @@
 <script>
 	function move(type) {
 		if(type == 'jquery') {
-			console.log('???')
-			location.href="/jqueryBoard/list.do?nowPage=1";
+			location.href="/jquery/list.do?nowPage=1";
 		} else {
-			
+			location.href="/vue/list.do";
 		}
 	}
 </script>

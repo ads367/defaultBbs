@@ -1,4 +1,4 @@
-package kr.co.sppartners.board.service;
+package kr.co.sppartners.jquery.service;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.sppartners.board.dao.BoardDAO;
-import kr.co.sppartners.board.vo.BoardVO;
+import kr.co.sppartners.jquery.dao.BoardDAO;
+import kr.co.sppartners.jquery.vo.BoardVO;
 
 @Service("boardService")
 public class BoardService {

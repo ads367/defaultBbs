@@ -143,21 +143,21 @@
 		var nowPage = idx;
 		var searchType = $("#searchType").val();
 		var searchKeyword = $("#searchKeyword").val();
-		var url = '/jqueryBoard/list.do?nowPage='+ nowPage;
+		var url = '/jquery/list.do?nowPage='+ nowPage;
 			url += '&searchType='+ searchType;
 			url += '&searchKeyword='+ searchKeyword;
 		location.href = url;
 	}
 	// 등록
 	function goWrite() {
-		location.href = "/jqueryBoard/write.do";
+		location.href = "/jquery/write.do";
 	}
 	// 상세 정보 조회
 	function goRead(id) {
 		var searchType = '<c:out value="${boardVO.searchType}" />';
 		var searchKeyword = '<c:out value="${boardVO.searchKeyword}" />';
 		var nowPage = '<c:out value="${boardVO.nowPage}" />';
-		var url = '/jqueryBoard/read.do?bbsId='+ id;
+		var url = '/jquery/read.do?bbsId='+ id;
 			url += '&nowPage='+ nowPage;
 			url += '&searchType='+ searchType;
 			url += '&searchKeyword='+ searchKeyword;

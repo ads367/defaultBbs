@@ -35,7 +35,7 @@ public class LikeController {
 			model.addAttribute("msg", "이미 누르셨습니다.");
 		}
 		
-		String url = "/jqueryBoard/read.do?bbsId="+ likeVO.getBbsId();
+		String url = "/jquery/read.do?bbsId="+ likeVO.getBbsId();
 		   url += "&nowPage="+ likeVO.getNowPage();
 		   url += "&searchType="+ likeVO.getSearchType();
 		   url += "&searchKeyword="+ likeVO.getSearchKeyword();

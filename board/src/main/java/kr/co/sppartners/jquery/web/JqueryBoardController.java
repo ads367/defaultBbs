@@ -1,20 +1,24 @@
-package kr.co.sppartners.board.webJquery;
+package kr.co.sppartners.jquery.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.sppartners.board.service.BoardService;
-import kr.co.sppartners.board.vo.BoardVO;
+import kr.co.sppartners.jquery.service.BoardService;
+import kr.co.sppartners.jquery.vo.BoardVO;
 
 @Controller
-@RequestMapping("/jqueryBoard")
+@RequestMapping("/jquery")
 public class JqueryBoardController {
+	
+	private Logger logger = LoggerFactory.getLogger(JqueryBoardController.class);
 	
 	@Resource(name="boardService")
 	private BoardService boardService;
@@ -25,6 +29,7 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/list.do")
 	public String list(@ModelAttribute BoardVO boardVO, Model model) throws Exception {
+		logger.info("################## Jquery list ##################");
 		boardVO.setPerPage(5);
 		boardVO.setPagingCnt(3);
 		int totalCnt = boardService.findAllBbsCnt(boardVO);
@@ -42,6 +47,7 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/write.do")
 	public String write() throws Exception {
+		logger.info("################## Jquery write ##################");
 		return "board_jquery/write.tiles";
 	}
 	
@@ -51,8 +57,9 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/writeAction.do")
 	public String writeAction(@ModelAttribute BoardVO boardVO, Model model) throws Exception {
+		logger.info("################## Jquery writeAction ##################");
 		boardService.saveBbs(boardVO);
-		String url = "/jqueryBoard/list.do?nowPage=1";
+		String url = "/jquery/list.do?nowPage=1";
 		return "redirect:" + url;
 	}
 	
@@ -62,6 +69,7 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/read.do")
 	public String read(@ModelAttribute BoardVO boardVO, Model model, HttpServletRequest req, HttpServletResponse res) throws Exception {
+		logger.info("################## Jquery read ##################");
 		model.addAttribute("info", boardService.findBbs(boardVO, req, res));
 		model.addAttribute("search", boardVO);
 		return "board_jquery/read.tiles";
@@ -73,8 +81,9 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/del.do")
 	public String del(@ModelAttribute BoardVO boardVO, Model model) throws Exception {
+		logger.info("################## Jquery del ##################");
 		boardService.delBbs(boardVO);
-		String url = "/jqueryBoard/list.do?nowPage="+ boardVO.getNowPage();
+		String url = "/jquery/list.do?nowPage="+ boardVO.getNowPage();
 			   url += "&searchType="+ boardVO.getSearchType();
 			   url += "&searchKeyword="+ boardVO.getSearchKeyword();
 		return "redirect:" + url;
@@ -86,6 +95,7 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/update.do")
 	public String update(@ModelAttribute BoardVO boardVO, Model model, HttpServletRequest req, HttpServletResponse res) throws Exception {
+		logger.info("################## Jquery update ##################");
 		model.addAttribute("info", boardService.findBbs(boardVO, req, res));
 		model.addAttribute("search", boardVO);
 		return "board_jquery/update.tiles";
@@ -97,8 +107,9 @@ public class JqueryBoardController {
 	 */
 	@RequestMapping("/updateAction.do")
 	public String updateAction(@ModelAttribute BoardVO boardVO) throws Exception {
+		logger.info("################## Jquery updateAction ##################");
 		boardService.updateBbs(boardVO);
-		String url = "/jqueryBoard/read.do?bbsId="+ boardVO.getBbsId();
+		String url = "/jquery/read.do?bbsId="+ boardVO.getBbsId();
 			   url += "&nowPage="+ boardVO.getNowPage();
 			   url += "&searchType="+ boardVO.getSearchType();
 			   url += "&searchKeyword="+ boardVO.getSearchKeyword();

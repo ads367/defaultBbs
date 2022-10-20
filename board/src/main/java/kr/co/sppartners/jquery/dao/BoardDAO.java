@@ -1,4 +1,4 @@
-package kr.co.sppartners.board.dao;
+package kr.co.sppartners.jquery.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.sppartners.board.vo.BoardVO;
+import kr.co.sppartners.jquery.vo.BoardVO;
 
 @Repository("boardDAO")
 public class BoardDAO {
@@ -21,7 +21,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public List<BoardVO> findAllBbs(BoardVO boardVO) throws Exception {
-		return sql.selectList("findAllBbs", boardVO);
+		return sql.selectList("boardDAO.findAllBbs", boardVO);
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int findAllBbsCnt(BoardVO boardVO) throws Exception {
-		return sql.selectOne("findAllBbsCnt", boardVO);
+		return sql.selectOne("boardDAO.findAllBbsCnt", boardVO);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int findBbsMaxId() throws Exception {
-		return sql.selectOne("findBbsMaxId");
+		return sql.selectOne("boardDAO.findBbsMaxId");
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int saveBbs(BoardVO boardVO) throws Exception {
-		return sql.insert("saveBbs", boardVO);
+		return sql.insert("boardDAO.saveBbs", boardVO);
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int updateBbsReadCnt(BoardVO boardVO) throws Exception {
-		return sql.update("updateBbsReadCnt", boardVO);
+		return sql.update("boardDAO.updateBbsReadCnt", boardVO);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public BoardVO findBbs(BoardVO boardVO) throws Exception {
-		return sql.selectOne("findBbs", boardVO);
+		return sql.selectOne("boardDAO.findBbs", boardVO);
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int delBbs(BoardVO boardVO) throws Exception {
-		return sql.update("delBbs", boardVO);
+		return sql.update("boardDAO.delBbs", boardVO);
 	}
 	
 	/**
@@ -84,6 +84,6 @@ public class BoardDAO {
 	 * @throws Exception
 	 */
 	public int updateBbs(BoardVO boardVO) throws Exception {
-		return sql.update("updateBbs", boardVO);
+		return sql.update("boardDAO.updateBbs", boardVO);
 	}
 }

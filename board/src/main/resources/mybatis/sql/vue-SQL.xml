@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vueBoardDAO">
+	
+	<!-- 목록 조회 -->
+	<select id="findAllBbs" parameterType="VueBoard" resultType="VueBoard">
+		SELECT bbs_id							AS bbsId
+			 , title							AS title
+			 , content							AS content
+			 , read_cnt							AS readCnt
+			 , updt_nm							AS updtNm
+			 , DATE_FORMAT(updt_dt, '%Y-%m-%d')	AS updtDt
+		  FROM default_bbs
+		 WHERE use_at = 'Y'
+		 <if test="searchKeyword != null and searchKeyword != ''">
+		 	<choose>
+		 		<when test="searchType != null and searchType != ''">
+		 			<if test="searchType == 'title'">
+		 			AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 			<if test="searchType == 'content'">
+		 			AND content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 		</when>
+		 		<otherwise>
+		 			AND ( title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				OR
+		 				  content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				)
+		 		</otherwise>
+		 	</choose>
+		 </if>
+	  ORDER BY updt_dt DESC
+		 LIMIT #{perPage} OFFSET #{startPage}
+	</select>
+	
+	<!-- 목록 갯수 조회 -->
+	<select id="findAllBbsCnt" parameterType="VueBoard" resultType="java.lang.Integer">
+		SELECT COUNT(bbs_id)
+		  FROM default_bbs
+		 WHERE use_at = 'Y'
+		 <if test="searchKeyword != null and searchKeyword != ''">
+		 	<choose>
+		 		<when test="searchType != null and searchType != ''">
+		 			<if test="searchType == 'title'">
+		 			AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 			<if test="searchType == 'content'">
+		 			AND content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 			</if>
+		 		</when>
+		 		<otherwise>
+		 			AND ( title LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				OR
+		 				  content LIKE CONCAT('%', #{searchKeyword}, '%')
+		 				)
+		 		</otherwise>
+		 	</choose>
+		 </if>
+	</select>
+	
+	<!-- 게시판 아이디 가장 큰 값 호출 -->
+	<select id="findBbsMaxId" resultType="java.lang.Integer">
+		SELECT NVL(MAX(bbs_id), 0) AS bbsId
+		  FROM default_bbs
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="saveBbs" parameterType="VueBoard">
+		INSERT INTO default_bbs (
+			bbs_id
+			, title
+			, content
+			, read_cnt
+			, regist_nm
+			, regist_dt
+			, updt_nm
+			, updt_dt
+			, use_at
+		) VALUES (
+			#{bbsId}
+			, #{title}
+			, #{content}
+			, 0
+			, #{registNm}
+			, NOW()
+			, #{registNm}
+			, NOW()
+			, 'Y'
+		)
+	</insert>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateBbsReadCnt" parameterType="VueBoard">
+		UPDATE default_bbs
+		   SET read_cnt = read_cnt + 1
+		 WHERE bbs_id = #{bbsId}
+	</update>
+	
+	<!-- 상세조회 -->
+	<select id="findBbs" parameterType="VueBoard" resultType="VueBoard">
+		SELECT bbs_id								AS bbsId
+			 , title								AS title
+			 , content								AS content
+			 , read_cnt								AS readCnt
+			 , regist_nm							AS registNm
+			 , DATE_FORMAT(regist_dt, '%Y-%m-%d')	AS registDt
+			 , updt_nm								AS updtNm
+			 , DATE_FORMAT(updt_dt, '%Y-%m-%d')		AS updtDt
+			 , use_at								AS useAt
+			 , ( SELECT COUNT(*)
+				   FROM default_like
+				  WHERE bbs_id = #{bbsId} )			AS likeCnt
+		  FROM default_bbs
+		 WHERE bbs_id = #{bbsId}
+	</select>
+	
+	<!-- 삭제 -->
+	<update id="delBbs" parameterType="VueBoard">
+		UPDATE default_bbs
+		   SET use_at = 'N'
+		 WHERE bbs_id = #{bbsId}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateBbs" parameterType="VueBoard">
+		UPDATE default_bbs
+		   SET title = #{title}
+			 , content = #{content}
+			 , read_cnt = #{readCnt}
+			 , updt_nm = #{updtNm}
+			 , updt_dt = NOW()
+		 WHERE bbs_id = #{bbsId}
+	</update>
+	
+</mapper>

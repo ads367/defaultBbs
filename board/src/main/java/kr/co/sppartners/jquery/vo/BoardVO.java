@@ -1,4 +1,4 @@
-package kr.co.sppartners.board.vo;
+package kr.co.sppartners.jquery.vo;
 
 public class BoardVO extends Common {
 	
