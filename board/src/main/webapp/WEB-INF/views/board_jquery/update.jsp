@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	.bodyDv {
+/* 	.bodyDv {
 		width: 80%;
 		margin: auto;
 	}
@@ -27,9 +27,9 @@
 	.btn_col {
 		margin-top: 10px;
 		text-align: right;
-	}
+	} */
 </style>
-<div class="bodyDv">
+<div class="bodyDv update">
 	<h1>Jquery Update</h1>
 	<form name="frm" id="frm" action="/jquery/updateAction.do" method="post">
 		<input type="hidden" id="bbsId" name="bbsId" value="<c:out value="${ info.bbsId }" />">
@@ -37,7 +37,7 @@
 		<input type="hidden" name="nowPage" id="nowPage" value="${ search.nowPage }">
 		<input type="hidden" name="searchType" id="searchType" value="${ search.searchType }">
 		<input type="hidden" name="searchKeyword" id="searchKeyword" value="${ search.searchKeyword }">
-		<table>
+		<table class="updateTable">
 			<tr>
 				<td class="sub">
 					<span>제목</span>
@@ -59,8 +59,8 @@
 		</table>
 	</form>
 	<div class="btn_col">
-		<button type="button" onclick="update()">수정</button>
-		<button type="button" onclick="cancel()">취소</button>
+		<button type="button" class="btnGrayLine" onclick="update()">수정</button>
+		<button type="button" class="btnGrayLine" onclick="cancel()">취소</button>
 	</div>
 </div>
 
