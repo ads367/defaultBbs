@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <style>
-	.bodyDv {
+/* 	.bodyDv {
 		width: 80%;
 		margin: auto;
 	}
@@ -27,12 +27,12 @@
 	.btn_col {
 		margin-top: 10px;
 		text-align: right;
-	}
+	} */
 </style>
-<div class="bodyDv">
+<div class="bodyDv write">
 	<h1>Jquery Write</h1>
 	<form name="frm" id="frm" action="/jquery/writeAction.do" method="post">
-		<table>
+		<table class="writeTable">
 			<tr>
 				<td class="sub">
 					<span>제목</span>
@@ -54,8 +54,8 @@
 		</table>
 	</form>
 	<div class="btn_col">
-		<button type="button" onclick="insert()">등록</button>
-		<button type="button" onclick="cancel()">취소</button>
+		<button type="button" class="btnBk" onclick="insert()">등록</button>
+		<button type="button" class="btnGrayLine" onclick="cancel()">취소</button>
 	</div>
 </div>
 

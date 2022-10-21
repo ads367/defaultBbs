@@ -1,0 +1,361 @@
+@charset "UTF-8";
+
+/*정렬*/
+.flexStart {
+	display:flex;
+	justify-content:flex-start;
+}
+.flexEnd {
+	display:flex;
+	justify-content:flex-end;
+}
+.flexCenter {
+	display:flex;
+	justify-content:center;
+}
+
+/* input, select */
+input, select {
+	height:35px;
+	padding:0 5px; 
+	border:1px solid #ccc;
+}
+select {
+	appearance:none;
+	background:url(../images/iconSelect.png) no-repeat 88% center / 9px;
+}
+/* 버튼 */
+[class^=btn] {
+	cursor:pointer;
+}
+.btnSearch {
+	width:auto;
+	height:35px;
+	background:none;
+	border:1px solid #ccc;
+	line-height:33px;
+}
+.btnGrayLine {
+	width:90px;
+	height:35px;
+	background:none;
+	border:1px solid #ccc;
+	line-height:33px;
+}
+.btnGrayLine:hover {
+	background:#f8f8f8;
+}
+.btnSearch:hover {
+	background:#f8f8f8; 
+}
+.btnBk {
+	width:90px;
+	height:35px;
+	background:#222;
+	color:#fff;
+	line-height:33px;
+}
+.btnLike {
+	background:none;
+	font-size:16px;
+	color:#565656;
+}
+
+/* 메뉴버튼 */
+.topBtn {
+	width:240px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin:20px auto;
+}
+.topBtn > button {
+	width:120px;
+	height:80px;
+	background:#fff;
+	font-family:'NanumSquareNeo', sans-serif;
+	font-size:18px;
+	text-align:center;
+	cursor:pointer; 
+}
+.topBtn > button.active {
+	background:#222;
+	color:#fff;
+	box-shadow:0 0 15px rgba(0,0,0,.25);
+}
+
+/* 페이징 */
+.pagination {
+	display:flex;
+	justify-content:center;
+	algin-items:center;
+	margin:20px 0 -55px 0;
+}  
+.pagination > a {
+	position:relative;
+	width:35px;
+	height:35px;
+	display:block;
+	line-height:35px;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
+} 
+.pagination > a:hover {
+	text-decoration:underline;
+}
+.pagination > a:first-child {
+	border-left:1px solid #ccc;
+}
+.pagination > a.current {
+	background:#f8f8f8;
+}
+.pagination > :is(.first, .prev, .next, .last) {
+	font-size:0;
+	color:transparent;
+}
+.pagination :is(.first, .prev, .next, .last):before {
+	content:""; 
+	position:absolute;
+	top:42%;
+	left:50%;
+	transform:translate(-50%, -50%) scaleX(0.6);
+	font-size:18px;
+	color:#222;
+}
+.pagination .first:before {
+	content:"\226A";
+	top:55%;
+	font-size:14px; 
+}
+.pagination .prev:before {
+	content:"\003C";
+	top:55%;
+	transform:translate(-50%, -50%) scaleX(0.6);
+	color:#888;
+}
+.pagination .next:before {
+	content:"\003E";
+	top:55%; 
+	transform:translate(-50%, -50%) scaleX(0.6);
+	color:#888;
+}
+.pagination .last:before {
+	content:"\226B";
+	top:55%;
+	font-size:14px;
+}
+
+
+/* 공통  */
+body {
+	position:relative;
+	background:#F6F7FA;
+	font-family:'NanumSquareNeo', sans-serif;
+	font-size:14px; 
+	color:#222;
+} 
+body:before {
+	content:"";
+	position:absolute;
+	right:20px;
+ 	bottom:0; 
+	max-width:600px;
+	width:100%;
+	height:100px;
+	background:url(../images/logoSp.png) no-repeat center / contain;
+	filter:brightness(0.9);
+	z-index:-1;
+}
+.bodyDv {
+	max-width:1400px;
+	width:100%;
+	background:#fff;
+	margin:40px auto;
+	padding:60px 40px;
+	font-size:14px;
+	box-shadow:0 0 15px rgba(0,0,0,.05);
+}
+.bodyDv > h1 {
+	position:relative;
+	font-size:32px;
+	font-weight:bold;
+	display:inline-block;
+}
+.bodyDv > h1:before {
+	content:"";
+	position:absolute;
+	top:-10px;
+	left:8px;
+	width:6px;
+	height:6px;
+	background:#1062DC;
+	border-radius:50%;
+}
+.bodyDv .searchDv {
+	display:flex;
+	align-items:center;
+	margin:40px 0 25px;
+}   
+.bodyDv .searchDv select { 
+	margin-right:5px;
+	padding:0 20px 0 10px;
+}
+.bodyDv .searchDv input[type=text] {
+	margin:0 -1px;
+}
+.bodyDv table {
+	width:100%;
+}
+.bodyDv table tr {
+	border-bottom:1px solid #dbdbdb;
+}
+.bodyDv table :is(thead th, tbody td) {
+	padding:15px 5px; 
+}
+/* 리스트 테이블 */
+.bodyDv table.listTable tbody tr:nth-child(odd) {
+	background:#f8f8f8; 
+}
+.bodyDv table.listTable tbody td:nth-child(2) {
+	padding:0;
+}
+.bodyDv table.listTable tbody td:nth-child(2) a {
+	max-width:30vw; 
+	width:100%;
+	display:inline-block;
+	padding:15px 5px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.bodyDv table.listTable tbody td:nth-child(2) a:hover {
+	text-decoration:underline;
+}
+.bodyDv .wrtieBtn { 
+	display:flex;
+	justify-content:flex-end;
+	margin-top:20px;
+}
+/* 읽기 페이지 */
+.bodyDv.read h1.viewTitle {
+	font-size:20px;
+	font-weight:bold;
+	border-top:1px solid #222; 
+	padding:20px 0 20px 15px;
+	text-align:left;
+}
+.bodyDv.read .viewInfo {
+	display:flex;
+	align-items:center;
+	gap:0 20px;
+	color:#565656;
+	padding:0 15px 20px 15px;
+	border-bottom:1px solid #dbdbdb;
+}
+.bodyDv.read .viewInfo p b {
+	padding-right:5px;
+}
+.bodyDv.read .viewInfo > div {
+	display:flex;
+	align-items:center;
+}
+.bodyDv.read .viewContent {
+	padding:20px 15px;
+	text-align:left;
+	border-bottom:1px solid #dbdbdb;
+}
+.bodyDv.read .viewContent pre {
+	font-family:'NanumSquareNeo', sans-serif;
+	font-size:14px; 
+	line-height:1.6;
+	color:#222;
+}
+.bodyDv.read .btnCol {
+	display:flex;
+	justify-content:flex-end;
+	align-items:center;
+	margin-top:20px;
+	gap:0 5px;
+}
+.bodyDv.read .btnCol >button {
+	font-family:'NanumSquareNeo', sans-serif;
+}
+/* 수정 페이지 */
+.bodyDv.update .updateTable {
+	margin-top:40px;
+} 
+.bodyDv.update .updateTable tr:first-child {
+	border-top:1px solid #222;
+}
+.bodyDv.update .sub {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:15px;
+}
+.bodyDv.update .sub span {
+	font-weight:bold;
+}
+.bodyDv.update .sub input[type=text] {
+	width:calc(100% - 100px);
+	font-family:'NanumSquareNeo', sans-serif;
+}
+.bodyDv.update .sub textarea {
+	width:calc(100% - 100px);
+	max-height:400px;
+	min-height:300px;
+	font-family:'NanumSquareNeo', sans-serif;
+	line-height:1.6;
+	overflow-y:auto;
+	padding:10px;
+	border:1px solid #ccc;
+	resize:none;
+	outline:0;
+} 
+.bodyDv.update .btn_col {
+	display:flex;
+	justify-content:flex-end;
+	align-items:center;
+	margin-top:20px; 
+	gap:0 5px;
+}
+/* 등록 페이지 */
+.bodyDv.write .writeTable {
+	margin-top:40px;
+} 
+.bodyDv.write .writeTable tr:first-child {
+	border-top:1px solid #222;
+}
+.bodyDv.write .sub {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:15px;
+}
+.bodyDv.write .sub span {
+	font-weight:bold;
+}
+.bodyDv.write .sub input[type=text] {
+	width:calc(100% - 100px);
+	font-family:'NanumSquareNeo', sans-serif;
+}
+.bodyDv.write .sub textarea {
+	width:calc(100% - 100px);
+	max-height:400px;
+	min-height:300px;
+	font-family:'NanumSquareNeo', sans-serif;
+	line-height:1.6;
+	overflow-y:auto;
+	padding:10px;
+	border:1px solid #ccc;
+	resize:none;
+	outline:0;
+} 
+.bodyDv.write .btn_col {
+	display:flex;
+	justify-content:flex-end;
+	align-items:center;
+	margin-top:20px; 
+	gap:0 5px;
+}

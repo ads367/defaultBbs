@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
-	table {
+	/* table {
 		width: 100%;
 		border-collapse: collapse;
 	}
@@ -12,7 +12,7 @@
 		padding-bottom: 10px;
 	}
 	td {
-		text-align: center;
+		text-align: center; 
 		padding: 5px;
 	}
 	.searchDv {
@@ -51,21 +51,21 @@
 	}
 	.read_a {
 		color: black;
-	}
+	} */
 </style>
 
 <div class="bodyDv">
 	<h1>Jquery List</h1>
-	<div class="searchDv">
+	<div class="searchDv flexEnd">
 		<select name="searchType" id="searchType">
 			<option value="" ${ boardVO.searchType eq '' ? 'selected' : '' }>전체</option>
 			<option value="title" ${ boardVO.searchType eq 'title' ? 'selected' : '' }>제목</option>
 			<option value="content" ${ boardVO.searchType eq 'content' ? 'selected' : '' }>내용</option>
 		</select>
 		<input type="text" placeholder="검색어를 입력하세요." name="searchKeyword" id="searchKeyword" value="<c:out value="${ boardVO.searchKeyword }" />">
-		<button type="button" onclick="goSearch(1)">검색</button>
+		<button type="button" class="btnSearch" onclick="goSearch(1)">검색</button>
 	</div>
-	<table>
+	<table class="listTable">
 		<colgroup>
 			<col style="width: 5%;" />
 			<col style="width: 45%;" />
@@ -104,13 +104,13 @@
 	<c:if test="${ fn:length(list) > 0 }">
 		<div class="pagination">
 			<c:if test="${ boardVO.nowPage != 1 }">
-				<a href="#" onclick="goSearch(1)">&lt;&lt;</a> 
-				<a href="#" onclick="goSearch('<c:out value="${ boardVO.nowPage - 1 }" />')">&lt;</a>
+				<a href="#" class="first" onclick="goSearch(1)">&lt;&lt;</a> 
+				<a href="#" class="prev" onclick="goSearch('<c:out value="${ boardVO.nowPage - 1 }" />')">&lt;</a>
 			</c:if>
 			<c:forEach begin="${ boardVO.firstPage}" end="${ boardVO.lastPage }" var="item">
 				<c:choose>
 					<c:when test="${ item == boardVO.nowPage }">
-						<b>${ item }</b>
+						<a href="#" class="current"><b>${ item }</b></a>
 					</c:when>
 					<c:otherwise>
 						<a href="#" onclick="goSearch('<c:out value="${ item }" />')">${ item }</a>
@@ -118,13 +118,13 @@
 				</c:choose>
 			</c:forEach>
 			<c:if test="${ boardVO.nowPage < boardVO.endPage }">
-				<a href="#" onclick="goSearch('<c:out value="${ boardVO.nowPage + 1 }" />')">&gt;</a>
-				<a href="#" onclick="goSearch('<c:out value="${ boardVO.endPage }" />')">&gt;&gt;</a>
+				<a href="#" class="next" onclick="goSearch('<c:out value="${ boardVO.nowPage + 1 }" />')">&gt;</a>
+				<a href="#" class="last" onclick="goSearch('<c:out value="${ boardVO.endPage }" />')">&gt;&gt;</a>
 			</c:if>
 		</div>
 	</c:if>
 	<div class="wrtieBtn">
-		<button type="button" onclick="goWrite()">글쓰기</button>
+		<button type="button" class="btnBk" onclick="goWrite()">글쓰기</button>
 	</div>
 </div>
 
