@@ -1,8 +1,9 @@
 /**
- * 공통 JS
+ * url 변경
+ * @param url : 기본 url
+ * @param queryStrList : parameter 정보
+ * @returns
  */
-
-// url 표기 변경
 function changeURL(url, queryStrList) {
 	var newUrl = url;
 	
@@ -26,7 +27,13 @@ function changeURL(url, queryStrList) {
 	}
 }
 
-//페이지 목록 이동
+/**
+ * 페이지 목록 이동
+ * @param url : 이동할 url
+ * @param obj : search정보
+ * @param id : 게시판 아이디
+ * @returns
+ */
 function movePage(url, obj, id) {
 	switch(arguments.length) {
 		case 2:
