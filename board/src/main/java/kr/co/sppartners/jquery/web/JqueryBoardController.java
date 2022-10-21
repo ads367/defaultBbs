@@ -24,7 +24,7 @@ public class JqueryBoardController {
 	private BoardService boardService;
 	
 	/**
-	 * Jquery 게시판 목록으로 이동
+	 * Jquery 게시판 목록 조회
 	 * @throws Exception
 	 */
 	@RequestMapping("/list.do")

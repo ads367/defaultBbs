@@ -65,8 +65,8 @@
 		  FROM default_bbs
 	</select>
 	
-	<!-- 등록 -->
-	<insert id="saveBbs" parameterType="VueBoard">
+	<!-- 게시판 등록 및 수정 -->
+	<insert id="upsertBbs" parameterType="VueBoard">
 		INSERT INTO default_bbs (
 			bbs_id
 			, title
@@ -82,13 +82,19 @@
 			, #{title}
 			, #{content}
 			, 0
-			, #{registNm}
+			, #{updtNm}
 			, NOW()
-			, #{registNm}
+			, #{updtNm}
 			, NOW()
 			, 'Y'
-		)
+		) ON DUPLICATE KEY
+		UPDATE
+			title = #{title}
+			, content = #{content}
+			, updt_nm = #{updtNm}
+			, updt_dt = NOW()
 	</insert>
+	
 	
 	<!-- 조회수 증가 -->
 	<update id="updateBbsReadCnt" parameterType="VueBoard">
@@ -119,17 +125,6 @@
 	<update id="delBbs" parameterType="VueBoard">
 		UPDATE default_bbs
 		   SET use_at = 'N'
-		 WHERE bbs_id = #{bbsId}
-	</update>
-	
-	<!-- 수정 -->
-	<update id="updateBbs" parameterType="VueBoard">
-		UPDATE default_bbs
-		   SET title = #{title}
-			 , content = #{content}
-			 , read_cnt = #{readCnt}
-			 , updt_nm = #{updtNm}
-			 , updt_dt = NOW()
 		 WHERE bbs_id = #{bbsId}
 	</update>
 	

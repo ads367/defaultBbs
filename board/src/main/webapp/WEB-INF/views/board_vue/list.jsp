@@ -82,7 +82,7 @@
 		<tbody>
 			<tr v-if="list.length > 0" v-for="(info, idx) in list">
 				<td>{{ info.bbsId }}</td>
-				<td><a class="read_a" href="#" @click="goRead(this.bbsId)">{{ info.title }}</a></td>
+				<td><a class="read_a" href="#" @click="goRead(info.bbsId)">{{ info.title }}</a></td>
 				<td>{{ info.updtNm }}</td>
 				<td>{{ info.updtDt }}</td>
 				<td>{{ info.readCnt }}</td>
@@ -92,7 +92,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<pagination :data-search="search" @pagingfn="goSearch" ref="table" for="table"></pagination>
+	<pagination :data-search="search" @pagingfn="goSearch"></pagination>
 	<div class="wrtieBtn">
 		<button type="button" @click="goWrite()">글쓰기</button>
 	</div>
@@ -128,19 +128,25 @@
 					method : 'post',
 					data : JSON.stringify(vm.search),
 					dataType : 'json',
-					async: false,
+// 					async: false,
 					beforeSend: function() {
 						
 					},
 					success : function(data) {
 						vm.list = JSON.parse(data.list);
 						vm.search = JSON.parse(data.search);
+						var url = '/vue/list.do';
+						var queryStr = [];
+							queryStr.push({key: 'nowPage', val: vm.search.nowPage});
+							queryStr.push({key: 'searchType', val: vm.search.searchType});
+							queryStr.push({key: 'searchKeyword', val: vm.search.searchKeyword});
+						changeURL(url, queryStr);
 					},
 					error : function(e) {
 						console.log(e);
 						alert('에러 발생\n관리자에게 문의하세요.');
 					},
-					complete: function(){
+					complete: function() {
 						
 					}
 				});
@@ -148,12 +154,12 @@
 			
 			// 상세조회
 			goRead: function(id) {
-				
+				movePage('/vue/read.do', this.search, id);
 			},
 			
 			// 등록
 			goWrite: function() {
-				
+				movePage('/vue/upsert.do', this.search);
 			}
 			
 		},

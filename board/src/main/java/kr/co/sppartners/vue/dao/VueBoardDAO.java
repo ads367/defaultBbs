@@ -43,15 +43,6 @@ public class VueBoardDAO {
 	}
 	
 	/**
-	 * 게시판 등록
-	 * @param VueBoard
-	 * @throws Exception
-	 */
-	public int saveBbs(VueBoard vueBoard) throws Exception {
-		return sql.insert("vueBoardDAO.saveBbs", vueBoard);
-	}
-	
-	/**
 	 * 게시판 조회수 증가
 	 * @param VueBoard
 	 * @throws Exception
@@ -79,12 +70,12 @@ public class VueBoardDAO {
 	}
 	
 	/**
-	 * 게시판 수정
+	 * 게시판 등록 및 수정
 	 * @param VueBoard
-	 * @throws Exception
+	 * @throws
 	 */
-	public int updateBbs(VueBoard vueBoard) throws Exception {
-		return sql.update("vueBoardDAO.updateBbs", vueBoard);
+	public int upsert(VueBoard vueBoard) throws Exception {
+		return sql.insert("vueBoardDAO.upsertBbs", vueBoard);
 	}
 	
 }

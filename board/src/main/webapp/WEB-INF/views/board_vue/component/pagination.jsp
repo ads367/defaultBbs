@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<style>
-	
-</style>
-
 <template id="pagination">
 	<div v-if="dataSearch.totalCnt > 0">
 		<a href="#" v-if="dataSearch.nowPage != 1" @click="pagingfn(1)">&Lt;</a>
@@ -21,7 +17,7 @@
 		methods : {
 			pagingfn: function(i) {
 				this.dataSearch.nowPage = i;
-				this.$emit('pagingfn', i);
+				this.$emit('pagingfn', i); 
 			}
 		},
 		computed : {

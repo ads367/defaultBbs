@@ -24,7 +24,7 @@ public class VueBoardController {
 	private VueBoardService vueBoardService;
 	
 	/**
-	 * Vue 게시판 목록페이지로 이동
+	 * Vue 게시판 목록 조회
 	 * @throws Exception
 	 */
 	@RequestMapping("/list.do")
@@ -40,6 +40,35 @@ public class VueBoardController {
 		model.addAttribute("search", mapper.writeValueAsString(vueBoard));
 		
 		return "board_vue/list.tiles";
+	}
+	
+	/**
+	 * Vue 게시판 상세 조회
+	 * @throws Exception
+	 */
+	@RequestMapping("/read.do")
+	public String read(@ModelAttribute VueBoard vueBoard, Model model) throws Exception {
+		logger.info("################## Vue read ##################");
+		ObjectMapper mapper = new ObjectMapper();
+		
+		model.addAttribute("info", mapper.writeValueAsString(vueBoardService.findBbs(vueBoard)));
+		model.addAttribute("search", mapper.writeValueAsString(vueBoard));
+		return "board_vue/read.tiles";
+	}
+	
+	/**
+	 * Vue 게시판 등록 및 수정
+	 * @throws Exception
+	 */
+	@RequestMapping("/upsert.do")
+	public String upsert(@ModelAttribute VueBoard vueBoard, Model model) throws Exception {
+		logger.info("################## Vue read ##################");
+		ObjectMapper mapper = new ObjectMapper();
+		
+		model.addAttribute("info", mapper.writeValueAsString(vueBoardService.upsert(vueBoard)));
+		model.addAttribute("search", mapper.writeValueAsString(vueBoard));
+		
+		return "board_vue/upsert.tiles";
 	}
 
 }

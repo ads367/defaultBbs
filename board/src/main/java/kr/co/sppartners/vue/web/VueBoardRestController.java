@@ -33,13 +33,37 @@ public class VueBoardRestController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		ObjectMapper mapper = new ObjectMapper();
 		
-		// 목록 갯수 조회
 		int totalCnt = vueBoardService.findAllBbsCnt(vueBoard);
 		vueBoard.setTotalCnt(totalCnt);
 		
-		// 목록 조회
 		mav.addObject("list", mapper.writeValueAsString(vueBoardService.findAllBbs(vueBoard)));
 		mav.addObject("search", mapper.writeValueAsString(vueBoard));
+		return mav;
+	}
+	
+	/**
+	 * Vue 게시판 삭제
+	 * @throws Exception
+	 */
+	@RequestMapping("/del.ajax")
+	public ModelAndView del(@RequestBody VueBoard vueBoard) throws Exception {
+		logger.info("################## Vue del(Ajax) ##################");
+		ModelAndView mav = new ModelAndView("jsonView");
+		vueBoardService.delBbs(vueBoard);
+		return mav;
+	}
+	
+	/**
+	 * 게시판 등록 및 수정
+	 * @throws Exception
+	 */
+	@RequestMapping("/upsert.ajax")
+	public ModelAndView upsert(@RequestBody VueBoard vueBoard) throws Exception {
+		logger.info("################## Vue upsert(Ajax) ##################");
+		ModelAndView mav = new ModelAndView("jsonView");
+		ObjectMapper mapper = new ObjectMapper();
+		
+		mav.addObject("info", mapper.writeValueAsString(vueBoardService.upsertAction(vueBoard)));
 		return mav;
 	}
 	
