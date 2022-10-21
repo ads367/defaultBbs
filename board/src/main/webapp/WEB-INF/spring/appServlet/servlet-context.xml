@@ -19,12 +19,13 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="1" />
-	</beans:bean>
+<!-- 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<beans:property name="prefix" value="/WEB-INF/views/" /> -->
+<!-- 		<beans:property name="suffix" value=".jsp" /> -->
+<!-- 		<beans:property name="order" value="1" /> -->
+<!-- 	</beans:bean> -->
 	
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -38,7 +39,6 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
 	<!-- jsonView -->
 	<beans:bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	<beans:bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"><!-- ObjectMapper이용한 역직열화 시, 알수없는 변수는 무시하도록해주는 설정 -->

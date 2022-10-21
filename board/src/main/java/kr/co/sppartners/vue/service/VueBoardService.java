@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.sppartners.jquery.vo.BoardVO;
 import kr.co.sppartners.vue.dao.VueBoardDAO;
 import kr.co.sppartners.vue.vo.VueBoard;
 

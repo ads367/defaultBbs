@@ -54,13 +54,13 @@
 <div class="bodyDv" id="vueCtrl" v-cloak>
 	<h1>Vue List</h1>
 	<div class="searchDv">
-		<select name="searchType" id="searchType">
+		<select name="searchType" id="searchType" v-model="search.searchType">
 			<option value="">전체</option>
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 		</select>
-		<input type="text" placeholder="검색어를 입력하세요." name="searchKeyword" id="searchKeyword">
-		<button type="button" onclick="goSearch(1)">검색</button>
+		<input type="text" placeholder="검색어를 입력하세요." name="searchKeyword" id="searchKeyword" v-model="search.searchKeyword" @keyup.enter="goSearch(1)">
+		<button type="button" @click="goSearch(1)">검색</button>
 	</div>
 	<table>
 		<colgroup>
@@ -80,20 +80,26 @@
 			</tr>
 		</thead>
 		<tbody>
-					<tr>
-						<td>${ item.bbsId }</td>
-						<td><a class="read_a" href="#" onclick="goRead('${item.bbsId}')">${ item.title }</a></td>
-						<td>${ item.updtNm }</td>
-						<td>${ item.updtDt }</td>
-						<td>${ item.readCnt }</td>
-					</tr>
+			<tr v-if="list.length > 0" v-for="(info, idx) in list">
+				<td>{{ info.bbsId }}</td>
+				<td><a class="read_a" href="#" @click="goRead(this.bbsId)">{{ info.title }}</a></td>
+				<td>{{ info.updtNm }}</td>
+				<td>{{ info.updtDt }}</td>
+				<td>{{ info.readCnt }}</td>
+			</tr>
+			<tr v-else>
+				<td colspan="5">데이터가 없습니다.</td>
+			</tr>
 		</tbody>
 	</table>
+	<pagination :data-search="search" @pagingfn="goSearch" ref="table" for="table"></pagination>
 	<div class="wrtieBtn">
-		<button type="button" onclick="goWrite()">글쓰기</button>
+		<button type="button" @click="goWrite()">글쓰기</button>
 	</div>
 </div>
 
+<!-- 컴포넌트 -->
+<jsp:include page="/WEB-INF/views/board_vue/component/pagination.jsp" />
 <script>
 	/* vue 객체 
 	 * el : 선택 html요소 내부에 있는 html요소들을 vue가 컨트롤 해줌.
@@ -108,9 +114,47 @@
 	var vm = new Vue({
 		el: "#vueCtrl",
 		data: {
-			
+			list: ${list},		// 게시물 목록
+			search: ${search}	// 검색 조건 및 페이징 처리
 		},
 		methods: {
+			// 검색
+			goSearch: function(nowPage) {
+				var vm = this;
+				this.search.nowPage = nowPage;
+				$.ajax({
+					url : '/vue/json/list.ajax',
+					contentType : "application/json; charset=UTF-8",
+					method : 'post',
+					data : JSON.stringify(vm.search),
+					dataType : 'json',
+					async: false,
+					beforeSend: function() {
+						
+					},
+					success : function(data) {
+						vm.list = JSON.parse(data.list);
+						vm.search = JSON.parse(data.search);
+					},
+					error : function(e) {
+						console.log(e);
+						alert('에러 발생\n관리자에게 문의하세요.');
+					},
+					complete: function(){
+						
+					}
+				});
+			},
+			
+			// 상세조회
+			goRead: function(id) {
+				
+			},
+			
+			// 등록
+			goWrite: function() {
+				
+			}
 			
 		},
 		filters: {
@@ -124,6 +168,7 @@
 		},
 		mounted: function () {
 			var vm = this;
+			
 		}
 	});
 </script>

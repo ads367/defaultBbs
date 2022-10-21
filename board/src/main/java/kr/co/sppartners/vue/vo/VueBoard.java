@@ -1,6 +1,11 @@
 package kr.co.sppartners.vue.vo;
 
-public class VueBoard  extends VueCommon {
+import java.io.Serializable;
+
+public class VueBoard extends VueCommon implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int bbsId;					// 게시판 아이디
 	
 	private String title;				// 제목

@@ -7,7 +7,7 @@ public class VueCommon {
 	/* 검색관련 */
 	
 	/* 페이징 처리를 위해 외부에서 받아 오는 필드 값 */
-	private int nowPage;		// 현재 페이지 번호
+	private int nowPage = 1;	// 현재 페이지 번호
 	private int perPage = 10;	// 출력할 페이지(row) 갯수
 	private int pagingCnt = 10;	// 화면에 표시할 페이징 번호 갯수
 	private int totalCnt;		// 게시물 총 갯수
