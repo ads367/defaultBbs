@@ -14,6 +14,10 @@
 	<script src="/resources/js/vue/lodash.js"></script>
 	<script src="/resources/js/vue/vue.js"></script>
 	<script src="/resources/js/vue/vue-pagination.min.js"></script>
+	
+	<!-- 공통 JS -->
+	<script src="/resources/js/common.js"></script>
+	
 	<link rel="stylesheet" href="/resources/css/reset.css">
 	<link rel="stylesheet" href="/resources/css/board.css">
 	<title>게시판 예제</title>
