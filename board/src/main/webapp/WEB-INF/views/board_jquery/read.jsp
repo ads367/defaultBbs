@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- <style>
-	.bodyDv {
-		width: 80%;
-		margin: auto;
-	} 
-	.viewTitle {
-		border-bottom: 1px solid;
-		padding-bottom: 5px;
-	}
-	.viewInfo {
-		margin-top: -17px;
-		text-align: right;
-	}
-	.viewContent {
-		text-align: justify;
-		margin-top: 40px;
-	}
-	.btnCol {
-		margin-top: 10px;
-		text-align: right;
-	}
-</style> -->
+
 <div class="bodyDv read">
 	<form id="frm" name="frm" action="/like/saveLike.do">
 		<input type="hidden" name="bbsId" id="bbsId" value="${ info.bbsId }">

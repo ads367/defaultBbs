@@ -1,41 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style>
-	.bodyDv {
-		width: 80%;
-		margin: auto;
-	}
-	.viewTitle {
-		border-bottom: 1px solid;
-		padding-bottom: 5px;
-	}
-	.viewInfo {
-		margin-top: -17px;
-		text-align: right;
-	}
-	.viewContent {
-		text-align: justify;
-		margin-top: 40px;
-	}
-	.btnCol {
-		margin-top: 10px;
-		text-align: right;
-	}
-</style>
-<div class="bodyDv" id="vueCtrl" v-cloak>
-	<h1 class="viewTitle">{{info.title}}</h1>
+
+<div class="bodyDv read" id="vueCtrl" v-cloak>
+	<h1 class="viewTitle" style="width: 100%;">{{info.title}}</h1>
 	<div class="viewInfo">
-		작성자 : {{info.updtNm}} | 
-		작성일 : {{info.updtDt}} |
-		조회수 : {{info.readCnt}} <br/>
-		<button type="submit" @click="likeUp">좋아요</button> : {{info.likeCnt}}
+		<p><b>작성자</b>  {{info.updtNm}}</p> 
+		<p><b>작성일</b>  {{info.updtDt}}</p>
+		<p><b>조회수</b>  {{info.readCnt}}</p>
+		<div>
+			<button type="submit" class="btnLike" @click="likeUp">&#10084;</button>  {{info.likeCnt}}
+		</div>
 	</div>
 	<div class="viewContent">
 		<pre>{{info.content}}</pre>
 	</div>
 	<div class="btnCol">
-		<button type="button" @click="del">삭제</button>
-		<button type="button" @click="goUpdate">수정</button>
-		<button type="button" @click="goList">목록</button>
+		<button type="button" class="btnGrayLine" @click="del">삭제</button>
+		<button type="button" class="btnGrayLine" @click="goUpdate">수정</button>
+		<button type="button" class="btnBk" @click="goList">목록</button>
 	</div>
 </div>
 

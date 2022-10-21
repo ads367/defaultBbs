@@ -12,7 +12,7 @@
 		if(type == 'jquery') {
 			location.href="/jquery/list.do?nowPage=1";
 		} else {
-			location.href="/vue/list.do";
+			location.href="/vue/list.do?nowPage=1";
 		}
 	}
 	

@@ -78,7 +78,7 @@ public class BoardService {
 		Cookie[] cookies = req.getCookies();	// 쿠키 호출
 		if(cookies != null) {
 			for(Cookie c : cookies) {
-				if(c.getName().equals("findBbs")) cookie = c;
+				if(c.getName().equals("viewBbs")) cookie = c;
 			}
 		}
 		// 쿠키가 존재할 경우
@@ -86,15 +86,15 @@ public class BoardService {
 			if(!cookie.getValue().contains("[" + boardVO.getBbsId() + "]")) {		// 쿠키는 존재하나 해당 값이 없을 경우
 				updateBbsReadCnt(boardVO);	// 조회수 증가
 				cookie.setValue(cookie.getValue() + "_[" + boardVO.getBbsId() + "]");	// 쿠키 값 추가
-				cookie.setPath("/");	// 경로
+				cookie.setPath("/");
 				cookie.setMaxAge(60 * 60 * 24);		// 쿠키 시간
 				res.addCookie(cookie);	// 쿠키 추가
 			}
 		// 쿠키가 존재하지 않을 경우
 		} else {
 			updateBbsReadCnt(boardVO);	// 조회수 증가
-			Cookie newCookie = new Cookie("findBbs", "[" + boardVO.getBbsId() + "]");	// 신규 쿠키 생성(쿠키명, 값)
-				   newCookie.setPath("/");		// 경로
+			Cookie newCookie = new Cookie("viewBbs", "[" + boardVO.getBbsId() + "]");	// 신규 쿠키 생성(쿠키명, 값)
+				   newCookie.setPath("/");
 				   newCookie.setMaxAge(60 * 60 * 24);	// 쿠키 시간
 			res.addCookie(newCookie);	// 쿠키 추가
 		}

@@ -1,6 +1,8 @@
 package kr.co.sppartners.vue.web;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +49,11 @@ public class VueBoardController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/read.do")
-	public String read(@ModelAttribute VueBoard vueBoard, Model model) throws Exception {
+	public String read(@ModelAttribute VueBoard vueBoard, Model model, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("################## Vue read ##################");
 		ObjectMapper mapper = new ObjectMapper();
 		
-		model.addAttribute("info", mapper.writeValueAsString(vueBoardService.findBbs(vueBoard)));
+		model.addAttribute("info", mapper.writeValueAsString(vueBoardService.findBbs(vueBoard, req, res)));
 		model.addAttribute("search", mapper.writeValueAsString(vueBoard));
 		return "board_vue/read.tiles";
 	}

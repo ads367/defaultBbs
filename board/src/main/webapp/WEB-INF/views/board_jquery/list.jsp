@@ -2,57 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<style>
-	/* table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-	th {
-		border-bottom: 1px solid;
-		padding-bottom: 10px;
-	}
-	td {
-		text-align: center; 
-		padding: 5px;
-	}
-	.searchDv {
-		margin-bottom: 15px;
-		text-align: right;
-	}
-	.bodyDv {
-		width: 80%;
-		margin: auto;
-	}
-	input {
-		width: 200px;
-		height: 25px;
-		font-size: 15px;
-		border: 0;
-		border-radius: 10px;
-		outline: none;
-		padding-left: 10px;
-		background-color: rgb(243, 243, 243);
-	}
-	.wrtieBtn {
-		margin-top: 25px;
-		text-align: right;
-	}
-	a.read_a:link {
-		text-decoration: none;
-	}
-	a.read_a:visited {
-		text-decoration: none;
-	}
-	a.read_a:hover {
-		text-decoration: underline;
-	}
-	a.read_a:active {
-		text-decoration: none;
-	}
-	.read_a {
-		color: black;
-	} */
-</style>
 
 <div class="bodyDv">
 	<h1>Jquery List</h1>

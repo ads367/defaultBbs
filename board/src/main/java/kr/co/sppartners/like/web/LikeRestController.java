@@ -2,6 +2,7 @@ package kr.co.sppartners.like.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class LikeRestController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/like.ajax")
-	public ModelAndView like(@RequestBody LikeVO likeVO, HttpServletRequest req) throws Exception {
+	public ModelAndView like(@RequestBody LikeVO likeVO, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("################## Vue like(Ajax) ##################");
 		ModelAndView mav = new ModelAndView("jsonView");
 		ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +45,7 @@ public class LikeRestController {
 		
 		VueBoard vueBoard = new VueBoard();
 		vueBoard.setBbsId(likeVO.getBbsId());
-		mav.addObject("info", mapper.writeValueAsString(vueBoardService.findBbs(vueBoard)));
+		mav.addObject("info", mapper.writeValueAsString(vueBoardService.findBbs(vueBoard, req, res)));
 		mav.addObject("status", chck == 0 ? "등록" : "중복");
 		
 		return mav;
