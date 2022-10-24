@@ -1,34 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-/* 	.bodyDv {
-		width: 80%;
-		margin: auto;
-	}
-	table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-	.sub {
-		text-align: left;
-		font-weight: bold;
-		padding-bottom: 10px;
-	}
-	.con_title {
-		width: 100%;
-		height: 25px;
-		font-size: 15px;
-	}
-	.con_content {
-		width: 100%;
-		height: 350px;
-		font-size: 15px;
-	}
-	.btn_col {
-		margin-top: 10px;
-		text-align: right;
-	} */
-</style>
+
 <div class="bodyDv update">
 	<h1>Jquery Update</h1>
 	<form name="frm" id="frm" action="/jquery/updateAction.do" method="post">
