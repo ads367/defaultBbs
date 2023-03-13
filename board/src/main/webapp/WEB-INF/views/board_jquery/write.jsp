@@ -22,6 +22,19 @@
 					<textarea class="con_content" name="content" id="content" placeholder="내용을 입력해주세요."></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td class="sub">
+					<span>파일 업로드</span>
+					<div class="fileUploadBox">
+						<input type="file" id="fileUpload" class="fileUpload">
+						<label for="fileUpload"></label>
+						<div class="fileBtnBox">
+							<button class="btnPlus" type="button">&plus;</button>
+							<button class="btnMinus" type="button">&minus;</button>
+						</div>
+					</div>
+				</td>
+			</tr>
 		</table>
 	</form>
 	<div class="btn_col">

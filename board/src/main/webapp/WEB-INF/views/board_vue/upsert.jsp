@@ -21,6 +21,19 @@
 				<textarea class="con_content" name="content" id="content" placeholder="내용을 입력해주세요." v-model="info.content"></textarea>
 			</td>
 		</tr>
+		<tr>
+			<td class="sub">
+				<span>파일 업로드</span>
+				<div class="fileUploadBox">
+					<input type="file" id="fileUpload" class="fileUpload">
+					<label for="fileUpload"></label>
+					<div class="fileBtnBox">
+						<button class="btnPlus">&plus;</button>
+						<button class="btnMinus">&minus;</button>
+					</div>
+				</div>
+			</td>
+		</tr>
 	</table>
 	<div class="btn_col">
 		<button type="button" class="btnBk" @click="upsert()">{{ info.bbsId == 0 ? '등록' : '수정' }}</button>
